@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13770" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13770"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--View Controller-->
+        <scene sceneID="tne-QT-ifu">
+            <objects>
+                <viewController id="BYZ-38-t0r" customClass="ViewController" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="fKM-Tc-J3A">
+                                <rect key="frame" x="16" y="47" width="343" height="40"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="40" id="Acp-h4-jCh"/>
+                                </constraints>
+                                <nil key="textColor"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" enablesReturnKeyAutomatically="YES"/>
+                                <connections>
+                                    <outlet property="delegate" destination="BYZ-38-t0r" id="zBf-AJ-xI9"/>
+                                </connections>
+                            </textField>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="JL6-ru-mRE">
+                                <rect key="frame" x="174.5" y="117" width="25" height="25"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="25" id="996-hb-mqN"/>
+                                    <constraint firstAttribute="height" constant="25" id="dHc-8W-pcD"/>
+                                </constraints>
+                                <state key="normal" image="eyeclose"/>
+                                <connections>
+                                    <action selector="changeButtonAction:" destination="BYZ-38-t0r" eventType="touchUpInside" id="pmu-Cx-ikD"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="fKM-Tc-J3A" secondAttribute="trailing" constant="16" id="0Rs-VN-Iej"/>
+                            <constraint firstItem="JL6-ru-mRE" firstAttribute="top" secondItem="fKM-Tc-J3A" secondAttribute="bottom" constant="30" id="DeE-Ga-0dC"/>
+                            <constraint firstItem="fKM-Tc-J3A" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="16" id="fZV-R8-zvv"/>
+                            <constraint firstItem="JL6-ru-mRE" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="gHW-OI-FyH"/>
+                            <constraint firstItem="fKM-Tc-J3A" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="27" id="o3a-AT-RJ9"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
+                    </view>
+                    <connections>
+                        <outlet property="PasswordTextField" destination="fKM-Tc-J3A" id="8wm-sL-qew"/>
+                        <outlet property="changeButton" destination="JL6-ru-mRE" id="zgR-Bu-OFG"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="369" y="-104"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="eyeclose" width="22" height="19"/>
+    </resources>
+</document>
