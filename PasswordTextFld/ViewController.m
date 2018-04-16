@@ -10,9 +10,7 @@
 
 @interface ViewController ()
 {
-    
-    NSString *passwordString,*passwordStar;
-    BOOL passwordTextFieldHadFocus ;
+    NSString *realString;
     
 }
 @end
@@ -22,51 +20,72 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view, typically from a nib.
-    
-    passwordTextFieldHadFocus = YES;
+     
     self.PasswordTextField.delegate =self;
     self.PasswordTextField.enablesReturnKeyAutomatically = YES;
+      realString = [[NSString alloc] init];
     
 }
-- (BOOL) textField: (UITextField *)theTextField shouldChangeCharactersInRange: (NSRange)range replacementString: (NSString *)string {
-    return YES;
-}
+
 -(BOOL) textFieldShouldReturn:(UITextField *)textField{
-    
     [textField resignFirstResponder];
     return YES;
 }
--(void)textFieldDidEndEditing:(UITextField *)textField{
-    
-    passwordString = textField.text;
-    NSString *str = textField.text;
-    NSMutableString *paswwordStr= [NSMutableString new];
-
-    if (str.length > 0) {
-        for (int i = 0; i<str.length; i++) {
-            [paswwordStr appendString:@"*"];
-            self.PasswordTextField.text = @"";
-        }
-        NSLog(@"%@",paswwordStr);
-        passwordStar = paswwordStr;
-        self.PasswordTextField.text = paswwordStr;
+- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string
+{
+    if(range.length + range.location > textField.text.length)
+    {
+        return NO;
     }
-}
-- (IBAction)changeButtonAction:(UIButton *)sender {
+    if ( textField == _PasswordTextField)
+    {
+        self.PasswordTextField.secureTextEntry = NO;
+        
+        if ([string isEqualToString:@""]) {
+            
+            if (realString.length > 0) {
+                realString =    [realString substringWithRange:NSMakeRange(0,[realString length] - 1)];
+                self.PasswordTextField.text = [ self.PasswordTextField.text substringWithRange:NSMakeRange(0,[ self.PasswordTextField.text length] - 1)];
+            }else{
+                NSLog(@"Reached END of String %@",realString);
+            }
+            
+        }else{
+            realString =  [realString stringByAppendingString:string];
+            NSLog(@"Real String: %@",realString);
+            
+            NSLog(@"Befor: %@", self.PasswordTextField.text);
+            self.PasswordTextField.text = [self.PasswordTextField.text stringByReplacingCharactersInRange:range withString:@"*"];
+            
+            NSLog(@"After: %@", self.PasswordTextField.text);
+        }
+        
+        return false;
+    }
     
-    if (passwordTextFieldHadFocus == YES)
+    else
+        return true;
+} 
+- (IBAction)changeButtonAction:(UIButton *)sender {
+    NSLog(@"%@",realString);
+    if ([self.changeButton.currentImage isEqual:[UIImage imageNamed:@"eyeclose"]])
     {
         UIImage *btnImage = [UIImage imageNamed:@"eyeopen"];
         [self.changeButton setImage:btnImage forState:UIControlStateNormal];
-        passwordTextFieldHadFocus = NO;
+        self.PasswordTextField.secureTextEntry = NO;
+        self.PasswordTextField.text = realString;
+        self.PasswordTextField.font = nil;
         [self.PasswordTextField resignFirstResponder];
-        
-        self.PasswordTextField.text = passwordString;
-    }else {
-        self.PasswordTextField.text = passwordStar;
+    }
+    else
+    {
         UIImage *btnImage = [UIImage imageNamed:@"eyeclose"];
         [self.changeButton setImage:btnImage forState:UIControlStateNormal];
-        passwordTextFieldHadFocus = YES;
+        self.PasswordTextField.text =@"";
+        for (int i=0; i<= realString.length; i++ )
+        {
+            self.PasswordTextField.text = [self.PasswordTextField.text stringByAppendingString:@"*"];
+        }
         [self.PasswordTextField resignFirstResponder];
     }
 }
